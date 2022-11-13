@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+
+  cf_dyndns:
+
+  traefik:
+
+  oauth_proxy:
+

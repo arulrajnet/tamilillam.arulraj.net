@@ -1,0 +1,24 @@
+{
+  "cloudflare": [
+    {
+      "authentication": {
+        "api_token": "${CF_DDNS_API_TOKEN}",
+        "api_key": {
+          "api_key": "${CF_DDNS_API_KEY}",
+          "account_email": "${CF_DDNS_ACCOUNT_EMAIL}"
+        }
+      },
+      "zone_id": "${CF_DDNS_ZONE_ID}",
+      "subdomains": [
+        {
+          "name": "${CF_DDNS_SUBDOMAIN}",
+          "proxied": false
+        }
+      ]
+    }
+  ],
+  "a": true,
+  "aaaa": true,
+  "purgeUnknownRecords": false,
+  "ttl": 300
+}

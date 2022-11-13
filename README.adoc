@@ -1,0 +1,9 @@
+[[tamil-illam-title]]
+= "Tamil Illam" Network
+My home network setup for remote access.
+
+:toc: left
+
+== Infra
+
+image:home-network-infra.drawio.svg[network-infra]

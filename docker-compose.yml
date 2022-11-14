@@ -1,5 +1,8 @@
 version: '3.8'
 
+volumes:
+  wg_easy_data:
+
 services:
 
   cf_ddns:
@@ -15,6 +18,35 @@ services:
     volumes:
       - ./conf/ddns/config.json:/config.json
     restart: always
+
+  wg_easy:
+    image: weejewel/wg-easy:latest
+    environment:
+      # Publically accessible host or IP
+      WG_HOST: "${WG_HOST}"
+      # Password for web admin UI
+      PASSWORD: "${WG_PASSWORD}"
+      # Host port of container
+      WG_PORT: "${WG_PORT}"
+      # IP address range given to the client
+      WG_DEFAULT_ADDRESS: "${WG_DEFAULT_ADDRESS}"
+      # DNS address for the client
+      WG_DEFAULT_DNS: "${WG_DEFAULT_DNS}"
+      # Subnets to access by the client
+      WG_ALLOWED_IPS: ${WG_ALLOWED_IPS}
+      WG_MTU: 1420
+    volumes:
+      - wg_easy_data:/etc/wireguard
+    ports:
+      - "${WG_PORT}:51820/udp"
+      - "51821/tcp"
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    sysctls:
+      - net.ipv4.ip_forward=1
+      - net.ipv4.conf.all.src_valid_mark=1
 
   # traefik:
 
